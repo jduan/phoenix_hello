@@ -9,7 +9,8 @@ defmodule HelloWeb.PageController do
     |> assign(:message, "Welcome Back!")
     |> assign(:name, "Dweezil")
     # both :message and :name will be available in the template
-    |> render(conn, "index.html")
+    |> put_layout(false)
+    |> render("index.html")
   end
 
   def show(conn, %{"id" => id}) do
