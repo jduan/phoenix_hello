@@ -1,7 +1,7 @@
 defmodule HelloWeb.PageController do
   use HelloWeb, :controller
 
-  plug :assign_welcome_message, "Welcome Back" when action [:index, :show]
+  plug :assign_welcome_message, "Welcome Back" when action in [:index, :show]
 
   def index(conn, _params) do
     # assign conveniently returns "conn"
@@ -9,10 +9,12 @@ defmodule HelloWeb.PageController do
     |> assign(:message, "Welcome Back!")
     |> assign(:name, "Dweezil")
     # both :message and :name will be available in the template
-    |> render conn, "index.html"
+    |> render(conn, "index.html")
   end
 
   def show(conn, %{"id" => id}) do
+    IO.inspect conn
+
     # 1. plain text
     # text conn, "Showing id #{id}"
 
@@ -20,16 +22,21 @@ defmodule HelloWeb.PageController do
     # json conn, %{id: id}
 
     # 3. HTML directly
-    html conn, """
-       <html>
-         <head>
-            <title>Passing an Id</title>
-         </head>
-         <body>
-           <p>You sent in id #{id}</p>
-         </body>
-       </html>
-      """
+    # html conn, """
+    #    <html>
+    #      <head>
+    #         <title>Passing an Id</title>
+    #      </head>
+    #      <body>
+    #        <p>You sent in id #{id}</p>
+    #      </body>
+    #    </html>
+    #   """
+
+    # 4. send responses directly by calling Plug functions
+    conn
+    |> put_resp_content_type("text/plain")
+    |> send_resp(201, "")
   end
 
   # assign a default message
