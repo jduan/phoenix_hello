@@ -9,7 +9,7 @@ defmodule HelloWeb.PageController do
     |> assign(:message, "Welcome Back!")
     |> assign(:name, "Dweezil")
     # both :message and :name will be available in the template
-    |> put_layout(false)
+    |> put_layout("admin.html")
     |> render("index.html")
   end
 
