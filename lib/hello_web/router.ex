@@ -17,6 +17,7 @@ defmodule HelloWeb.Router do
     pipe_through :browser # Use the default browser stack
 
     get "/", PageController, :index
+    get "/show/:id", PageController, :show
     # get "/hello", HelloController, :index
     # get "/hello/:messenger", HelloController, :show
     resources "/users", UserController do
