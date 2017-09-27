@@ -6,6 +6,22 @@ defmodule HelloWeb.PageController do
   end
 
   def show(conn, %{"id" => id}) do
-    text conn, "Showing id #{id}"
+    # 1. plain text
+    # text conn, "Showing id #{id}"
+
+    # 2. JSON response
+    # json conn, %{id: id}
+
+    # 3. HTML directly
+    html conn, """
+       <html>
+         <head>
+            <title>Passing an Id</title>
+         </head>
+         <body>
+           <p>You sent in id #{id}</p>
+         </body>
+       </html>
+      """
   end
 end
