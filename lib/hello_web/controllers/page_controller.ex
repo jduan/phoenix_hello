@@ -9,9 +9,9 @@ defmodule HelloWeb.PageController do
     # |> assign(:message, "Welcome Back!")
     |> assign(:name, "Dweezil")
     # both :message and :name will be available in the template
-    |> put_layout("admin.html")
-    # |> render("index.html")
-    |> render("index.text", message: message)
+    # |> put_layout("admin.html")
+    |> render("index.html")
+    # |> render("index.text", message: message)
   end
 
   def help(conn, _params) do
