@@ -51,6 +51,18 @@ defmodule HelloWeb.PageController do
     |> send_resp(201, "")
   end
 
+  def index2(conn, _params) do
+    pages = [%{title: "foo"}, %{title: "bar"}]
+
+    render conn, "index.json", pages: pages
+  end
+
+  def show2(conn, _params) do
+    page = %{title: "foo"}
+
+    render conn, "show.json", page: page
+  end
+
   # assign a default message
   defp assign_welcome_message(conn, msg) do
     assign(conn, :message, msg)
