@@ -3,7 +3,7 @@ defmodule HelloWeb.PageController do
 
   plug :assign_welcome_message, "Welcome Back" when action in [:index, :show]
 
-  def index(conn, params=%{"message" => message}) do
+  def index(conn, _params) do
     # assign conveniently returns "conn"
     conn
     # |> assign(:message, "Welcome Back!")
