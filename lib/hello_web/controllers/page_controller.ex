@@ -14,6 +14,16 @@ defmodule HelloWeb.PageController do
     |> render("index.text", message: message)
   end
 
+  def help(conn, _params) do
+    # redirect conn, to: "/redirect_test"
+    redirect conn, to: redirect_test_path(conn, :redirect_test)
+    # redirect conn, external: "https://elixir-lang.org/"
+  end
+
+  def redirect_test(conn, _params) do
+    text conn, "Redirect!"
+  end
+
   def show(conn, %{"id" => id}) do
     IO.inspect conn
 

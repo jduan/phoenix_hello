@@ -17,6 +17,7 @@ defmodule HelloWeb.Router do
     pipe_through :browser # Use the default browser stack
 
     get "/", PageController, :index
+    get "/help", PageController, :help
     get "/show/:id", PageController, :show
     # get "/hello", HelloController, :index
     # get "/hello/:messenger", HelloController, :show
@@ -24,6 +25,10 @@ defmodule HelloWeb.Router do
       resources "/posts", PostController
     end
     resources "/reviews", ReviewController
+  end
+
+  scope "/", HelloWeb do
+    get "/redirect_test", PageController, :redirect_test, as: :redirect_test
   end
 
   scope "/admin", HelloWeb.Admin, as: :admin do
