@@ -3,14 +3,15 @@ defmodule HelloWeb.PageController do
 
   plug :assign_welcome_message, "Welcome Back" when action in [:index, :show]
 
-  def index(conn, _params) do
+  def index(conn, params=%{"message" => message}) do
     # assign conveniently returns "conn"
     conn
-    |> assign(:message, "Welcome Back!")
+    # |> assign(:message, "Welcome Back!")
     |> assign(:name, "Dweezil")
     # both :message and :name will be available in the template
     |> put_layout("admin.html")
-    |> render("index.html")
+    # |> render("index.html")
+    |> render("index.text", message: message)
   end
 
   def show(conn, %{"id" => id}) do
