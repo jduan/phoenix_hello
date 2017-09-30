@@ -26,7 +26,11 @@ defmodule HelloWeb.Router do
     # get "/hello", HelloController, :index
     # get "/hello/:messenger", HelloController, :show
     resources "/users", UserController
-    resources "/reviews", ReviewController
+    resources "/sessions", SessionController, only: [:new, :create, :delete],
+      # define RESTful routes but doesn't require a resource ID to be
+      # passed along in the URL becuase our actions are always scoped to
+      # the "current" user in the system
+      singleton: true
   end
 
   scope "/", HelloWeb do
@@ -42,4 +46,16 @@ defmodule HelloWeb.Router do
   # scope "/api", HelloWeb do
   #   pipe_through :api
   # end
+
+  defp authenticate_user(conn, _) do
+    case get_session(conn, :user_id) do
+      nil ->
+        conn
+        |> Phoenix.Controller.put_flash(:error, "Login required")
+        |> Phoenix.Controller.redirect(to: "/")
+        |> halt()
+      user_id ->
+        assign(conn, :current_user, Hello.Accounts.get_user!(user_id))
+    end
+  end
 end
