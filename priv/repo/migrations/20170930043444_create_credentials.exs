@@ -4,7 +4,11 @@ defmodule Hello.Repo.Migrations.CreateCredentials do
   def change do
     create table(:credentials) do
       add :email, :string
-      add :user_id, references(:users, on_delete: :nothing)
+      # "null: false" disallows creating credentials without an existing user
+      # By using a database constraint, we enforce data integrity at the
+      # database level, rather than relying on ad-hoc and error-prone
+      # application logic.
+      add :user_id, references(:users, on_delete: :delete_all), null: false
 
       timestamps()
     end
