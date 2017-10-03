@@ -33,6 +33,12 @@ defmodule HelloWeb.Router do
       singleton: true
   end
 
+  scope "/cms", HelloWeb.CMS, as: :cms do
+    pipe_through [:browser, :authenticate_user]
+
+    resources "/pages", PageController
+  end
+
   scope "/", HelloWeb do
     get "/redirect_test", PageController, :redirect_test, as: :redirect_test
   end
