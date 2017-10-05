@@ -6,6 +6,7 @@ defmodule Hello.CMS do
   import Ecto.Query, warn: false
   alias Hello.Repo
 
+  alias Hello.CMS.{Author, Page}
   alias Hello.CMS.Page
 
   @doc """
@@ -214,7 +215,7 @@ defmodule Hello.CMS do
   Otherwise, create an author entry and return it.
   The unique constraints relies on the "foreign key" at the database level.
   """
-  def ensure_author_exists(%Accounts.User{} = user) do
+  def ensure_author_exists(%Hello.Accounts.User{} = user) do
     %Author{user_id: user.id}
     |> Ecto.Changeset.change()
     |> Ecto.Changeset.unique_constraint(:user_id)
