@@ -153,7 +153,7 @@ defmodule Hello.CMS do
   def get_author!(id) do
     Author
     |> Repo.get!(id)
-    |> Repo.preoad(user: :credential)
+    |> Repo.preload(user: :credential)
   end
 
   @doc """
