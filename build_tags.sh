@@ -1,2 +1,2 @@
 #!/usr/bin/env bash
-ctags -R lib
+ctags -R lib test
